@@ -2,7 +2,7 @@
 
 # 코드 수정 후 배포 방법
 # 1. 로컬 터미널에서 먼저 docker login 진행
-# docker login -u lfin
+# docker login
 # 2. 프로젝트 경로로 이동 후 deploy.sh 실행
 # sh ./deploy.sh
 
