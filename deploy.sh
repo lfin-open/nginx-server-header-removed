@@ -2,7 +2,7 @@
 
 # 코드 수정 후 배포 방법
 # 1. 로컬 터미널에서 먼저 docker login 진행
-# docker login
+# docker login -u lfin
 # 2. 프로젝트 경로로 이동 후 deploy.sh 실행
 # sh ./deploy.sh
 
@@ -22,20 +22,19 @@ fi
 IMG_PREFIX="lfin"
 IMG_NAME="nginx-server-header-removed"
 
-# 2. docker latest, current 태그 변수 생성
-NOW="$(date +%Y)$(date +%m)$(date +%d)-$(date +%H)$(date +%M)"
+# 2. nginx 와 alpine 버전 기준으로 태그 생성 (** 버전 변경 시 변경 필수! **)
+VERSION="1.28.0-alpine3.22.0"
 
-IMAGE_NAME_CURRENT="${IMG_PREFIX}/${IMG_NAME}:${NOW}"
+IMAGE_NAME_WITH_VERSION="${IMG_PREFIX}/${IMG_NAME}:${VERSION}"
 IMAGE_NAME_LATEST="${IMG_PREFIX}/${IMG_NAME}:latest"
 
 echo "🐳 Building Docker image"
-echo "$NOW"
-echo "$IMAGE_NAME_CURRENT"
-echo "$IMAGE_NAME_LATEST"
+echo "$VERSION"
+echo "$IMAGE_NAME_WITH_VERSION"
 
-# 3. docker latest, current 각각 multi 플랫폼 빌드 후 push
+# 3. nginx 와 alpine 버전 기준 및 latest 각각 multi 플랫폼 빌드 후 push
 docker buildx build  --platform linux/amd64,linux/arm64 -f Dockerfile \
-  --push -t $IMAGE_NAME_CURRENT  . --no-cache
+  --push -t $IMAGE_NAME_WITH_VERSION  . --no-cache
 
 docker buildx build  --platform linux/amd64,linux/arm64 -f Dockerfile \
   --push -t $IMAGE_NAME_LATEST  . --no-cache
