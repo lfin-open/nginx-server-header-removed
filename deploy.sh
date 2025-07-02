@@ -23,7 +23,7 @@ IMG_PREFIX="lfin"
 IMG_NAME="nginx-server-header-removed"
 
 # 2. nginx 와 alpine 버전 기준으로 태그 생성 (** 버전 변경 시 변경 필수! **)
-VERSION="1.28.0-alpine3.22.0"
+VERSION="1.28.0-alpine3.22.0-v1.0.1"
 
 IMAGE_NAME_WITH_VERSION="${IMG_PREFIX}/${IMG_NAME}:${VERSION}"
 IMAGE_NAME_LATEST="${IMG_PREFIX}/${IMG_NAME}:latest"
